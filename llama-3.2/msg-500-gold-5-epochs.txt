@@ -1,0 +1,500 @@
+Converting this to an enum makes it obvious that I combined things that don't really belong together. It would probably be better to create two enums `StoreType` and `TransportType` (in more appropriate locations). That also makes it necessary to have (at least) two `ServerSettings` classes. `IncomingServerSettings` and `OutgoingServerSettings`. Also, the naming is inconsistent. Maybe it would be better to make the string that is used for import/export explicit, e.g. WEBDAV("WebDAV").
+This looks like you're not collecting everything from the error channel.
+Can we propagate this error up the stack?
+change of name is not needed
+Doesn't this go in the opposite direction of #1051 / #1062 by putting platform-specific logic back into this module?
+nit: What do you think of `copilot-task-group`?
+We can't unfortunately change any of our old flags :( it'd be a breaking change. Instead, we can keep both `githubURLFlag` and `repoURLFlag` and make the description of `githubURLFlagDescription` as "(Deprecated) Use --url instead. GitHub respository URL for your service." It would be even better if we can make `githubURLFlag` as hidden but keep in the command. This way old commands will still work with `--github-url` but it won't appear anymore in the help menu.
+discipline vs. Discipline? Not sure of which is correct. Also not sure if there is already an existing string const.
+@angmas1 move the else up, next to the closing bracket of the if block. Also, there is no need for the braces as your else statement contains only a single line. Make your if-else block similar to the block in lines 277-280.
+Report listeners are synchronized, even 'though the cache is thread-safe... I've not profiled it, but it may be a cause of contingency. Any better way around this? Also, do listeners **really** need to be synchronized? Can't we just make them thread-safe?
+Wouldn't it be better to use a sql `IN ( :exact_value )` ?
+At some point we need to condense down and refactor our "configs" as we have too many in too many places and we're starting to get more illegible code. No change necessary but calling out for future reference.
+And again. The reason it's bad is that if someone uses a JDK not produced by Oracle they won't have this class.
+There is already a log in `BaseMetastoreTableOperations` for this. It has the location, but not the table name. Maybe just add table name to that one.
+similar here for imports, these should be consolidated (and also consolidated with the grouping below)
+Can you please change the name of this class to be something else?
+We should avoid adding a pandera dependency to Dagster itself.
+line is 138 characters
+why are we turning this one into a Warning?
+Again. This is part of the start up of the server, and the diagnostics are helpful.
+I guess `sid` was for `sessionID`, but now it looks strange: `sid.ID`.
+In general I'm a trying to understand the reason behind this PR. Looks like if a blob (name) already exists we check if the contents are identical? In what scenarios this is not the case? When we want to publish a package/asset that has changed but still we want to use the same version?
+Why the space?
+hey, aren't we supposed to be passing in two parameters here?
+why is this here? We already have a message pool in the node.
+I think it makes more sense to have this be a method on TaskStatus. Also, nit, Backend, not BackEnd.
+Should we bite the bullet and poll for the full 5 minutes that AWS recommends? If we do that, we'll probably want to leave some kind of breadcrumb in the event log to let users know why it's taking so long to launch.
+We don't store empty dictionary entries anymore: they bring no benefits, only trouble.
+Why this is needed?
+Since this may be the case, wondering if we should call the param `updated_at_i` or something so that we don't run into a problem distinguishing them down the road?
+Why are currency signs considered punctuation? They technically fall under the BMP range for Currency Symbols `\u20A0-\u20CF` (covered in `getUnicodeNonBmpRegExp`, which is itself a misnomer)
+Is betterLOG_IF(ERROR, status != 0) ?
+I assume there will never be a scenario where justValidate is expected to be true on a restart
+Shouldn't this be `cls.param.warning`?
+This is the actual fix.
+nit: maybe call these `loadCollection()/loadDb()`
+should not be this lessThan15MinAgo ?
+Do we really need the param here? If only partial results returned, we could return ResultCode::PARTIAL_RESULTS;
+@The-Compiler Is this style okay or would you prefer a common userscript exception base?
+I think it would make sense to also set `internalWebPropertyID` to `''` here. Otherwise, it might keep its previous value (let's say a property was selected before, but then the user chooses "Create new property"), but since it always should depend on `propertyID`, that would be incorrect.
+nit: "*mapping" for a map is unnecessary. Consider calling this `originalNames` or similar.
+You'll also need to adjust `FakeWebTabAudio` in `tests/helpers/stubs.py`.
+Okay sorry about this I was really confused on how to support uncontrolled in this case, so what we want to do is apply `defaultValue` when `props.value` is falsy but not undefined, right? In the case of us seeing it is controlled (value & onChange present) we apply defaultValue to `props.value` (and delete props.defaultValue) In the case of uncontrolled we shouldn't enter this branch at all and go for full native dom behavior
+As isCaret is False by default, explicitly specifying isCaret=False here is not needed, and is perhaps a little confusing. I'd prefer that anywhere in the codebase that isCaret is only ever specified if it needs to be set to true. Mirroring that of isFocus for setNavigatorObject.
+I agree with Stephen it's better to invoke getStandards() only once.
+`Anomaly` imported here, but not used. Please run the changed files through pylint with nupic pylint config and fix pylint findings related to your changes.
+Please revise the naming of these two flags. _**default**_ is the value we take when user doesn't provide. You could infer from the fact how `default_parts_num` are used.
+Who invited yoda?   In all seriousness though, wouldn't an `if (empty())` be better here?
+The name of this argument is not too intuitive. The point is, these kind of subprocess calls will return `str`s in Python2 and 'byte`s in Python3. It would be a lot of work to make CodeChecker handle both `str` and `byte` everywhere. Using the `universal_newlines` argument, we can force Python3 to return text rather then bytes.
+Nit should be using `goimports` to format the import statements with standard libary imports first, new line, followed by non-standard library imports.
+Yep, looks right; your new selector _should_ disqualify the rule from being XDP accelerated.
+@developit I vaguely remember you mentioning something about some JS engines having an escape analysis feature that makes objects (and arrays?) locally declared that never leave the function essentially free from a GC perspective or something. Do you think we could benefit from that here? Or should we leave this as it is?
+New generators should have version `next`
+Can you provide a `--with-systemdsystemgeneratordir` option here? So that I can do unprivileged installs without completely turning off systemd. I can add it as a follow-up PR too.
+Wondering whether it should be `self.clone`, or `other.clone` or maybe a new `DynamicMap` declaration entirely. I see this is in the condition where `other` is a `DynamicMap`but is this definitely right in terms of `kdims`? I need to think about it more...
+Can we rename 'refresh' to 'read' and 'update' to 'write'? Until I had read more of the code below, I couldn't tell the difference between 'update' and 'refresh'.
+i think it's OK to leave this?
+body is being used here for the first time without every being populated. This will error. To run tests do `./go clean test_py` and that will run the Firefox tests
+Use the new Ruby 1.9 hash syntax.
+Please add a space after the comma here (generally, with arguments there's always a space after commas).
+Can this just be an else?
+sorry, why this change?
+body is being used here for the first time without every being populated. This will error. To run tests do `./go clean test_py` and that will run the Firefox tests
+File is not `goimports`-ed
+I have followed the convention of `cp`
+does it return something?
+probably better to use `wlr_seat_keyboard_end_grab()`.
+nit: I can't help but think the privateTransactionHandler should be a base-class member ... every Priv Json RPC seems to need it...
+maybe we can do this in Init function?
+During our zoom and working on this, I said that I believe it was set to 64MB, not 32MB, but the diff shows that I was wrong. So we could change it back to 32MB.
+In C, file scope variables are already initialized to 0 so the "= NULL" is redundant. Not a big deal.
+Returning here bypasses all the health check and load balancing features.
+This button should also be disabled when in secure mode since it opens a web browser from which you can easily do a lot of insecure stuff.
+We can just use `.stack()` here? Then I guess we can reuse when supporting multi-index columns.
+What happens if there is no NIB/XIB with that name?
+> k1 src0 src2 -> dst s/src2/src1/ nit: k1 is actually src0 according to instr_get_src(instr, 0) which makes this a little confusing
+I think you should use `app.config`. In the usual case, the config file is not overwritten, there is additional config file outside of the source of `Invenio`.
+Most of the following test changes can be avoided if need be.
+Can you make this accept an action instead?
+why is a buffered channel larger than 1 needed here? the separate goroutines can just try to write to the channel with a select-default block, and then it is not needed. i find the current implementation a bit convoluted, maybe we could simplify it a bit? not sure why it is needed for example to communicate an empty result. these patterns can be simplified using waitgroups
+could we add this file only when we need one?
+nit: the others use the method name in the api and not the class name of the api
+Typo: this should free `xwayland` instead
+this change looks wrong to me. I think the test is trying to signal that something went wrong by throwing the `Error` here, otherwise the `catch` below will swallow it.
+Pretty sure the single quotes here should be double quotes, single quotes are not expanded by the shell.
+Do we still need this?
+Still request a local sort for bin-packing based on the defined table sort order.
+Looks more appropriate to stick this in `AbsolutePath`.. actually that already has `FLATBUFFERS_NO_ABSOLUTE_PATH_RESOLUTION`
+assignments should only be cuddled with other assignments (from `wsl`)
+can you put this flag in `blockRefInfo` instead? It would be a shame to add one more file per block, especially since we've run into inode limits. I guess `blockRefInfo` should maybe then be renamed to `blockInfo` or something. But we're stuck with the filename.
+So, such tasks that could possibly not meet the deadline will never have a chance to run? I think this is not nice behavior, especially for those projects who has sometimes some very small tasks after the big one.
+Is it possible to import from k8s instead of copy in? :)
+Does `sudo` required for `darwin` only? Don't we need it for `linux` too?
+If the logger isn't used, it probably doesn't need to be added.
+Tests for JWT handler functionality?
+I believe this whole file can be deleted now.
+Are you making it so startup script HAS to be in sources?
+Hm. This could be a case of left-sided driving, having u-turn lanes on the right side. Good catch, but looks good to me.
+Throw an exception instead
+Small nit, and sorry for not spotting sooner.. this should have `omitempty` on it, else when marshalling nil values into json, it will be `caBundle: null` which trips up some JSON parsers
+Is there any issue with 2.2.3? If not this should be `<2.3`.  
+For my understanding, the DATA manifest & DELETE manifest could share the same read / write path so I think we could use the common reader+writer. Is there any other reason that we need to make them separate paths ?
+During testing, we adopt the score threshold specified in the config file. Here the threshold is only used for visualization, and the variable name `score_thr` can be misleading. Renaming it to `show_score_thr` would be better.
+commit message, "currently ignored"? (-ed)
+how about a default parameter instead?
+Probably in another PR, I think the package should be renamed to `servicebus` to be consistent.
+Can you add back these newlines? We try to avoid non-functional changes like this because they can cause commit conflicts.
+@p-l- Hey it seems that this was len-4 ?!
+Add a space between if and opening parenthesis please (i.e. `if (`)
+@tkaessmann when I ran tests I saw this line has a bug. It inverts the SHOULD and MUST. Hopefully I fixed it and merged it without the bug.
+I can't see any reason why this would fix a failure in `a.True(confirmed, "txgroup")`. We might have an issue elsewhere, but increasing the wait time wouldn't help.
+What's the motivation behind switching to plural here? I think we want singular cc @abhinav
+I think we should check the type returned by `getLiteral` and handle that here. Then we won't need separate code for different versions.
+Double check the issuers package too :)
+Does this mean the content changed with the new pyopenssl version? Is Wireshark already compatible with this new format?
+If only Gatling uses it, can we skip introducing new entity for now? Looks like overkill...
+Try to use factory association declaration for default values, so it could minimal the line length. You may write in fetch_job factory like association :repository, factory: :repository.
+do not toucm NDM please - there will be lots of conflicts
+It bothers me that the user calls `initialize` without also calling `finalize`. It seems to me that we're essentially making `lbann_comm` a singleton object. Going further down this path, we would put `initialize` inside `lbann_comm`'s constructor and `finalize` in the destructor. This has it's own weirdness - the user must make sure it's lifespan matches the beginning and end of the program. We may also run into the case where someone might want multiple instances of `lbann_comm`, but this is not too important.
+I suggest that we rely on `--controllers='*,gateway-shim'` for now, and we can then move from `--controllers='*,gateway-shim'` to automatically enabling the Gateway API support on startup using the discovery API in 1.6 or 1.7, what do you think? Note that the logic I wrote in e5436df521015057e77de3fe02c174ea8a863b93 should also use this `GatewaySolverEnabled` flag I think.
+Convention is to use TEST
+nullability does not apply to headers type (that is always an object)
+What is is subject when it's not the email subject. Why are we having to do this crap? What's calling this with an empty string?
+there seems to be one KeyNode in kubernetes.go of PV.. would it make sense to use it?
+- Use type from `service_discovery/dto/price.go` - Rename `Price` -> `Money`
+highway have the same problem we can add a new method in invocation: mergeContext 1.if new context have more items, then addAll to new context, and replace old context 2.if new context have less items, then allAll to old context directly.
+Make the flag derived default available in the readiness controller
+I wonder if the default here should be nightly? I won't block on that though just a question for a follow up.
+Good call. Makes we wonder if we should do this with the ARIA props.
+A function that returns empty string.
+AWS Identity and Access Management (IAM)
+do we want to register this in the mock server for testing?
+Should we expose this attribute in the Asciidoctor.js API ?
+please resolve the extra indentation
+Why do we need this flag? can this be detected if the table is bucketed/partitioned and enabled/disabled automatically? Is this for backwards compatibility?
+will your editor integrate `gofmt`, `goimports`, etc...?
+As far as I can see you're not rollbacking transaction anywhere. This could potentially cause further issues(and very hard to debug ones) with not synchronized transactions between message handling. Is the transaction required in this place anyway? You seem only to be fetching data here. ack method is performing some updates so it makes sense
+Unrelated to this PR, we should remove this exception. We now require `numpy`.
+Nit: Past tense of `reset` is also `reset`.
+Could you add some extra text here, so that it reads "eth_coinbase function is not available, please use --private.api.addr option instead of --chaindata option", so that it is clear that the function can work, but different options
+You can start by logging out the error
+This isn't a fatal error, we don't want to crash just because we can't set configs, we have sane defaults set
+Shouldn't this be in the child and not in the base plugin? Wouldn't having it here enable all derived plugins at once?
+This function is also called in various Site Kit module components, where the error object (here `data`) also needs to be passed, otherwise the link to fix the issue won't appear.
+Good removal here for two reasons: we're redeclaring `app.ConfigPath` immediately below without having used the initial value, and `app.GetConfigPath()` will build the value using the same process as in this line anyway.
+I feel we should not fix this.
+TODO: remove this unused import
+this is golang's named return, err is defined, `return` is equivalent to `return err` the current code has no problem
+nit: how about `GitSHA`?
+what to do if some failed? just logging?
+Hmm, AFAICT `*out_variant` isn't explicitly set to `NULL` in the `ENOENT` case.
+I think you missed this.
+I don't think this needs to be a float if its a number of seconds... :)
+can't this just be left undefined/null?
+This looks a bit cryptic to me, and also it contains a dash. How about `mymysterium.url`?
+Under what circumstance would we have a span id already? Is this for testing purposes?
+cc @anurse This exists now. Kestrel currently passes the current time to all callbacks as an optimization. Just an FYI.
+Can you rename `Ports` to `PortsUnsafe`?
+This should be `pygment=False` like in `browsertab.py`
+this should happen before the `go k.manage()`, otherwise the node will always try the bootnodes first
+you could probably use `const` for both?
+Just saw this and wasn't able to hold myself from renaming :-).
+Again not 100% sold on the name
+can you change this instead to just `type.toString()` and then you wouldn't have to expose the getBitMask in the enum. (Alternatively you could have used `type.hashCode()` but that doesn't feel as nice)
+Can we make these asserts more strict/precise? I remember this test helped to spot the issue of inconsistent results on different platforms due to using `sort` instead of `stable_sort`.
+Missing the license
+`QtOSError` inherits `OSError`, so I don't think it's needed to list them both here.
+Do you want to make this an assertion instead?
+I think this can be called `HasField`, because that's what it's doing. It really is independent of revision.
+This check/exception is a guard for the next few lines of code. It shouldn't be necessary now. In fact, I don't think you need the if (parentConnection.type == Blockly.INPUT_VALUE) branch at all.
+maybe switch the order in order to make this a positive assertion instead of a negative one? i.e. `if key =~ /id/` first.
+You should do: AssertEx.AreEqual(importPeptideSearchDlg.CurrentPage, ImportPeptideSearchDlg.Pages.match_modifications_page);
+Need to update the doc for `TelemetrySDK` and `Host` structs deleting references from removed functions.
+This will make other pods that run antctl will also connect its localhost? Maybe only do it when it's in antrea-agent and antrea-controller
+why this recursive relationship definition?
+How soon after this will Apply() be called? It would be a shame if there was still a significant delay before a missing or superfluous route was corrected.
+Repeating big interface in many places shows smtg is wrong with design
+Given this will 'pause' bolt for a few seconds on older rubies, perhaps emit a debug message saying "Warming up OpenSSL" or something to that effect
+not related to this change?
+This test is specifically checking behavior on sync I/O (note there are tests with Write in the name, and other tests with WriteAsync). Enable sync I/O here.
+as a future improvement, maybe we should just change `ForAllFlowRecordsDo` so that `updateOrSendFlowRecord` uses a flow record pointer instead of a copy of stored flow record. This whole code is executed with the lock any way.
+Could we just use case insensitive strings as keys instead of creating a new map implementation? e.g. simply using a treemap with a comparator `Map<String, Integer> idToPos = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);` could work I think
+Unsure why this is `RestoreFiles` now vs `GoldenRetriever`, thought we deprecated the first?
+Thanks for catching the bug. Here your change lets `v4IPNet` and `v6IPNet` take the first IPv4/IPv6 address in `addrList`. Maybe choose the last one also works and makes code simpler? What's your idea? @tnqn
+I think we should use `FileExistsPolicy.Overwrite` instead. Files _should_ always be newer, but in the unlikely case they wouldn't be, I'm afraid some files would be overwritten and other not, leading to inconsistencies that will be hard to figure out.
+Right now it's a bit unclear that this needs to be called explicitly by the implementing class. If, for example, there's another backend, it won't get this update unless we add the same function as webkit. Could you either add a note to this docstring explaining that this needs to be called, or find some way to automatically trigger this so the webkit override isn't needed (and some override passed on webengine).
+Is it correct that `SessionDto` should be here?
+Are you sure `v3EndpointIDToContainerName` and `v3EndpointIDToTask` are saved in the state file, can you verify that?
+AWS Identity and Access Management (IAM)
+How about renaming `escape` to `use_path_normalized` or something to better indicate that it is a selection between `path` and `path_normalized`?
+question: what is happening here?
+I'd rather just send the parameter twice than break encapsulation here. There's already precedence with webelement IDs
+Or `QUIC_LOG_LEVEL`. Which one do you prefer?
+"Openvpn check" we could move this to separate prefix.
+You can use `http.MethodHead` here.
+Why to introduce this intermediate variable?
+This was necessary due to a bug uncovered in testing. If an actor method which requires params is called without any params at all, not returning an error here causes a panic.
+`ctx` is unused in ReportStat
+only dev and local
+Probably a good optimization to have this, but I don't think it's strictly required. For "legacy" Activity flows we pass them through an ActivitySource for sampling. So the logic below should also catch these?
+maybe give it a more descriptive name, e.g. `competitiveFilter`
+@nghialv btw, perhaps was this method originally created for copying the repo root to the given `dest` as a subdirectory?
+Sorry for going back and forth. Adding docstring here would be very helpful for others to understand the need of this method.
+Unnecessary new line
+shouldn't we name abbreviations up-cased? `myId` -> `myID`?
+fields may be an object.
+~Why are putting all these APIs in their own ~packages~ files? So many more ~directories~ files, to what end? Why not just have them all be a part of the same API file and all live alongside each other so you can easily see them?~ Edit: nevermind, probably works best in separate files.
+Was this removed to ignore the extra columns coming from the file projection?
+When we undo this for 1.3, do we not need to leave these three entries intact to avoid renumbering of the subsequent constants? If so perhaps the changes to this file should be pulled into a separate initial commit so we can just `git revert` the remainder...
+~~I think lines 65-67 should be moved into this else clause after `type = ...` Else, it is a bit confusing why we check the enclose type validity a second time~~ Nevermind, will do some refactoring, myself. But thanks for "fixing" this!
+shouldn't this be `android_keystore_name`?
+Test used to use old bouncycastle dependency which isn't needed anymore from Hadoop. Switched to use builtin Java split.
+Would it make sense to also add `setMaxParallelism` in addition to this to match the Flink API?
+Nit: unified names between geth and contracts
+nit: you could have named it just "TestCase" (if django's TestCase was imported differently)
+change pkg_errors to errors. Keep it consistent across all the files.
+I think a "string" in Scapy's spirit (if such a thing exists) is actually a `bytes` object in Python 3 (see `Str*Field`s). So maybe `RandString._fix()` should return a `bytes` object. What do you think?
+I don't think this belongs here. If the application can take a local_ip as input, the application should take care of it, not in this common library
+I think this is more of a semantic difference than a typo - `weiter hinzufgen` is like `continue adding` whereas `weitere hinzufgen` is like `add more`. I think it makes sense to change it though  
+this seems extraneous.
+@Samuell1 Will assigning the same icons array to all the tabs result in, for example, a primary tab called "Colours" and secondary tab called "Colours" having the same icon?
+This should now use `[]`, so it crashes if the var is missing
+would rename to TopicsFilter and original one to SequenceTopicsFilter
+This line doesn't seem to be right?
+Why change this?
+Would this break things if Ghost is run in a subdirectory or no?
+Aside: this is a confusing name for an interface that contains multiple addresses.
+Do we need to internalize net.sourceforge.pmd.lang.java.ast.JavaParserConstants on master, so that we can rename it?
+Sorry, typo s/unusuable/unusable/
+Maybe you can correct the typo "if" too :)
+This is good and something that I think opens a lot of possibilities. I think what would be even better is to change up `TracerProviderSdk` to take factories for the processors just like it already does for the instrumentations. Should probably use use a factory for the sampler. If we made those 2 changes then we could actually split this all up into the config and the build phase and we could use the factory methods in the hosting version to call into the IServiceProvider to get those instances.
+We need to switch from BeamSync to FullSync when we download all the needed headers, blocks, receipts and state
+And the old names for these variables made more sense imo.
+Was `DefaultLogMessageRateLimit` not configurable anywhere?
+I suggest, that we move the regex (`[^a-zA-Z0-9_]`) to a separate constant field, because we're using it in multiple places and I think it's quite prone to misspellings.
+@NiklasGustafsson - I had to make these changes for the x-ms-client-name extension tests for java and python. The tests were expecting wire format instead of the client name. Hence modified them appropriately. Let me know what you think ?
+other declaration of errors (from `typecheck`)
+Is there a need to replace the Index with a MasterIndex?
+Not directly related to the topic of this ticket: I think this API design is a bit confusing. To disable delemetry, I would write `managementService.enableTelemetry(false)` which is not intuitive to read. Maybe `toggleTelemetry` instead of `enableTelemetry` is more clear.
+this file is model generated by protobuf, just for compatible test it's better not change it.
+this is a breaking API change. Do we really need to do it in 6.2.0? Can't we just deprecate the methods?
+I noticed (SonarCloud noticed actually) that the implementation of `::edit` method is the same as `__construct` is. Does it make sense to call the `edit` method from the constructor?
+> specialised This isn't a typo in my neck of the woods  
+Do we actually use Include anywhere yet or is this just for completion?
+Should we update integral to operate on a single column as well?
+This just always calls refs. I think we need to either hoist ref invocation back out of `setProperty()` (it used to happen during rendering), or wait for component recycling to go away.
+Hmm, should we also cache the `smoothingScore` for this hit? Or, if we will keep it at returning `0`, couldn't we remove this impl and inherit the default from `Scorable`?
+Is this TODO still valid? Or are we going to put this somewhere else later?
+This isn't new, but getHeightWidth is now defined in block_svg.js, block_render_svg_horizontal.js, and block_render_svg_vertical.js. One of these should be unnecessary.
+Note that this is in the context of SolrCloud, so "secondary" doesn't apply and should be instead follower
+Just do: `return node.hasAttribute('aria-hidden')`
+maybe we should keep one test case for ErrFileNotExists and update only one file for ErrWorkspaceNotFound?
+That's fine though, meaning that you can send to this channel under the server lock. The internalSendLoop will pick up the change when the server lock is released (if loop is blocked trying to grab the server lock). Even the way you do it here (releasing the lock, sending, then reacquiring) does not guarantee that the internalSendLoop will have time to refresh in that interval.
+Is this not required?
+Is there a reason why we wouldn't use this as the default?
+You can most likely remove that (and the try/finally) too, as we shouldn't have any flickering from removing/inserting tabs anymore now.
+@angmas1 just make one more change here too. Move the else line to the line above it, where the if block ends and remove the braces like in line 280.
+Are these imports needed (BiConsumer and Consumer)? If they are unused imports, then precommit will fail.
+We usually use OkDialog()
+This would be better served as a method/property that is set when people don't want to a window.
+"Request line" here too.
+Minor: Hmmm...is it worth setting this explicitly for the tests that it affects?
+what is the effect of changing these buckets in existing data that is available in the monitoring system? if there are any existing dashboards that use previous histogram buckets they are probably going to be wrong ot invalid? also any reason why we chose these specific values?
+Shouldn't we throw an exception if the context is null instead ?
+@guolinke Don't you mind to rename this variable to `DATATABLE_INSTALLED`, for the consistency with other variables (for example, there are `PANDAS_INSTALLED` but not `PD_INSTALLED`). Also, `DT` is a little bit confusing: sometimes `dt` is used for `datetime`.
+move this line together to after line 16, group internal packages together
+So `queryRange.Step` will be ignored?
+I'm not sure if there are any links to swap for Handosntable package. Should this be a top lvl script?
+Hmm I think I might've messed up this condition here... Need to look more at it
+Or maybe `func(args ...string) Policy` to make it dynamic in case of any future policy that may require more than one args.
+before the fix, does this sentence make service crash? My point is can you re-produce the problem. I'm not sure the bug is due to non-asiic code
+I suggest "no parent snapshot found, will read all data\n".
+Would you explain why here please? E.g. from the PR description > the renderer expects to be able to use the secondary color as the fill for a shadow.
+File is not `goimports`-ed (from `goimports`)
+Extra empty line detected at class body beginning.
+why do we create a time type here?
+Can you replace these by `else if` please?
+either make this a config or a constant we can define at the top. Burying this in the code is no good.
+Need to populate the `RequestID` field for these errors. This can be obtained from r.RequestID i think, but need to make sure. The `r.RequestID` should of been populated from the `UnmarshalMeta` handler list.
+nit: If we want to squeeze out a few more milliseconds from the startup, we may actually be able to remove this line (`wait_for_port_open(PORT_DYNAMODB_BACKEND, http_path="/", ...` should already be sufficient to ensure that the service is up and responding to HTTP requests). Thoughts?
+Make `CircuitBreakerManager` implement `PluginInfoInitialized`
+Could this be done by mocking objects instead? I feel like this is changing too much of the actual logic just for the tests.
+I'm confused as to how these are both passing.
+Either I'm missing something or specs actors should remove this call cc @anorth
+Encountered this because I had a stray comma. Figured I'd tweak it a bit.
+Just verifying: this change doesn't break the 18f layout, right?
+For the command executor, which in turn, uses the HTTP client to talk to the WebDriver, the client might have high-timeout values set, so the shutdown can take a long time if we wait for it to complete, especially if multiple-long running threads are there. I think it might be a good idea in general to couple the shutdown() with `awaitTermination()` with a timeout, if the ongoing tasks do not complete within that timeout then call `shutdownNow()`. What do you think?
+NULL change, could you move that out too?
+This is wrong, should be `entry.getValue()`
+looks like you added newlines after blocks in a few files - I generally like newlines before/after multi-line blocks _except_ when the end the block is directly nested inside another block (eg: two `end`s next to each other) what do you think?
+is this something we've been missing this whole time?
+The formatting is a little off here.
+both edge and normal need to set this, so set it to be default action?
+stateRoot or maybe ParentHeader would make more sense from API point of view?
+Seems like this might need to allow for `"`s to be used here?
+We should file a bug for this - we don't need the extensions class if there are no operations on the client
+I checked the tests coverage and strangely it look like those three lines are not covered (?!). Do you have the same result on your side ?
+We'd lose the data here from the original teardown_exception and only get the dump_exception - I fear that that could make the actual error difficult to track if it cascades.
+This requires updating the name in the `endpoints` tests, please run `make test`.
+not blocking: can we remove extra lines here?
+ClockIpLpi2c4.Enable() is required. The same change is required for enablePeripheralClocks().
+just looks like you should return an **empty map** with nil error
+Hi Ramya, rather than checking here in the perf counter library, we should add the privilege check in the host_exerciser app.
+are we not asking for trouble here by not pinning this? or does 3.* imply all of the draft versions we'd try to validate?
+missing space before `TextView`
+You somehow got a change from `master` into your branch again, in e6d2167085688264e5ee6a81cfd2a7a8f10ded13. While it's not something terribly bad (as it will be fine after merging), it's kind of confusing, and I have no idea how it happens :laughing: Are you trying to update changes from `master` while working on your branch somehow? How do you do that?
+Changed per review in Blockly.
+this line is so long, split it to multi lines.
+should we have a common `Escape()` method that can be used everywhere?
+we can just have this method call the next, passing in the file metadatas (deduplication of logic)
+Are there any other templates where this command needs to be added, or were those issues specific to storage requiring us to enable a new command group?
+concatHosts may be a better func name to explain this?
+Since we have the same logic in both forms, can we make a shared partial/helper for it?
+Can you please move this interface as class in common Constants file in az-core module?
+I think we might need some special handling for `Spec.ControlPlaneLoadBalancer.SecurityGroups`, it looks like we are currently only handling the case that `Spec.ControlPlaneLoadBalancer` is nil.
+nit: I'm assuming you have verified this is what the error message should read like
+perhaps file can be removed altogether (trying to avoid an empty package for these build tags)
+ListWorkflowExecutionsRequest <- this can be nil?
+Please import modules and not classes (except for Qt stuff).
+`affine_grid` and `grid_sample` are currently unused. We may remove it from `ops/__init__.py` to speedup the loading of mmdet.
+We have Vue application at our disposal, and have examples container implemented as component. Shouldn't helpers be imported instead being global? Not the best practice in Vue app I guess
+What about Secrets, are we not also trying to cover those?
+i hope there is some magic where isEmpty or some cron can strip all non listable products from cart, but since we have the situation tested it should be OK and also we'll see during tests
+If the `MemoryBasedStorage` relies on a `self._bump_and_store_timestamp()`, then every child class will have to implement it. So it should not be prefixed with `_`. And should raise `NotImplementedError` etc. :)
+Because the default value of allowedOrigins is * (all origins), so it isn't necessary to set again at all.
+Why add this here?
+This function is what **the compositor** calls when it wants to fullscreen a client, not what the client calls.
+Looks like this is for debugging? Maybe just remove.
+This is something I added which resolved a few large errors in the output, although not related to the refactor here I don't think.
+Is this still necessary?
+again: it is a bad practice to have some global parameters with such common names for unit test purpose.
+We can revert this to reduce the diff of the PR.
+\`bbox_feats.shape[0] > 0\` requires the number of proposal is not 0.
+I don't think we need an empty value here; any middleware that wants a default value for empty placeholders will pass in what that value should be.
+wouldn't it be useful to split this into an error metric for the timing?
+it's unclear to me which method you are recommending overriding?
+nit: align the leftmost quotes
+That's a huge load of new dependencies. I think it's better to create a reload function on ScriptManager and control with enum instead.
+Compute `(time_forward + 1e-3) * 1e3 / loop_num` ahead.
+wow :+1: , i do not even know how this test works.
+This logic should be handled at informer handle functions i.e. AddFunc, UpdateFunc, DeleteFunc
+Have we reached binding-level agreement on the `subscribe` terminology? My only concern is that it doesn't seem descriptive enough and may be confused with subscribing for notifications.
+Was this an intentional deletion? Why not just allow overwrite of `deploy_mode`?
+Can we use the existing `InstalledTimestamp` function?
+Isn't he diamond operator Java7+?
+Can we rename this field to `Subject`? Looking around, it seems like 'subject' is the standard terminology for this stanza  
+Oh interesting - does web-test-runner not resolve package.json files?
+Perhaps move this option into a separate speechViewer section, as we are planning to also save position information as well.
+Nit: missing a space. I think we should phrase the new content a little differently. "It is important" isn't very clear. I think it should be "offsets will be returned in sorted order."
+Docstring would be nice
+`stateDB := NewStateDBAdapter(sm, 0, hash.ZeroHash256, NotFixTopicCopyBugOption())`
+Should we explain more here?
+nit: `procfd` seems more appropriate now?
+If it parses failed, both of the `containerName` and `podId` should be the empty strings, it's non-sense to define this error, I suggest just return it.
+can we add an example?
+redundant null check?
+Would it make sense to create an empty file here, perhaps in a tmp dir, instead of checking empty files into Git?
+We can do away with assigning the response here too.
+Please revert this file.
+This seems unused.
+Please do not add author here
+nit: a switch perhaps?
+Can we name this `TableObject`? I'm not a big fan of the `I` prefix for interfaces and that's not really used in Go. Is it also possible to have the method be unexported? I don't know if that's possible. If it's not, this is good. If it is possible, I'd prefer this method to be unexported.
+`testExecutionPb` is a global variable (from `gochecknoglobals`)
+We may create an issue to track this so we don't forget?
+why do we need to explicitly declare these fields?
+I have concerns about using this in more places before #3278 - I'll take a look at that again shortly.
+This expected value should probably be what you literally expect, otherwise there's a chance getClusterRegion is doing something wrong and the test wouldn't catch it because it's being run for both expected and actual.
+I would skip this check or add an internal server error response.
+I don't see any test cases which would test that fix dates are set properly on review status changes / storage events. For this reason please create some more test cases and also check my scenarios above.
+@halter73 where is this file generated from?
+This code is way too complicated for what it does. I don't want to be a PITA, but what can you consider rewriting it in a simpler way? I'm talking about the whole `_getDerivationIndexes` function
+Nearly there! This should assert on the output, take the result of "start" and "finish" as an example :)
+Nit: no need for "to" at the end of the doc because it already uses "to which".
+No formatting directives, `glog.Error` will do just fine.
+Minor: you can access `current_user` in here directly - don't need to pass it in. Unless you prefer passing it explicitly?
+nit: just for consistency we can move this import block down. Right above openshift/hive imports
+Not sure if it's a good idea to remove stop channel. If user cancels connection how will you stop pinger?
+`classification` is misspelled
+Instead of patching vendor, let's update the version of sdk-go to a more recent one that doesn't have this line.
+Please add the Copyright header.
+should we validate that AWSRegion has also been set here so that we don't get into the if-block that relies on the ec2 metadata client below?
+Rather than just getting rid of the memoization maybe we should use an `after_save` filter to set it to `nil` so that it will be recomputed on next read?
+Glad we fixed this as well. Blockly is going to be left as-is for this case, right?
+I don't think this should enable xwayland, because it's convenient to toggle xwayland just by setting `xwayland` to `false`
+This should now be made into `if (it->second.empty())` ?
+This change (import org.shredzone.flatter4j.model.User;) does not seem relevant to this fix / commit.
+I am not sure what GitHub wants to tell me with this icon here :)
+It'd be nice to assert the right deprecation is being raised, just add a third argument of `/"its" method/`
+Why is this required to turn the static readonlies into jitted const? Is this a bug in the jitter?
+I was thinking about this for #2928 too, which also uses `endsWith`... Presumably `SomeOtherObject` would match `endsWith("Object")`, meaning that something more sophisticated like splitting it then iterating right to left would be needed in order to do this robustly?
+Another nitpick: parens around the arg pretty please
+Could you simply add it to the previous clause ?
+Walk should actually be completed (`onWalkCompleted`) after the event is stopped.   This also makes it possible for monster to walk by smaller paths.
+Add `--format` as an option. Does it make sense to have all display options available? Also need to add `--inventoryfile` and possibly the global_config_options.
+__toString() is not a part of QueryInterface
+Would it be too complicated to refactor `currLimit` to be an `int64`?
+Any particular reason for 8? I feel like we could probably handle more...
+I don't think this is necessary since `CommonLabels` is a public func and every component name is also public constant.
+For GCP we included the API name (see below) so you can distinguish between uses other than `blob` once they exist, WDYT?
+Remove the trailing white space
+I believe that all the changes in this file are not valid for v1.2 of the Avalon toolkit.
+This was properly set above as `<target>.runfiles/<workspace_name>` (with a fallback to workspace root dir) but never used past this line.
+Please remove the unused imports :)
+Maybe just `FAILED`. We can't be sure loading was the thing that failed.
+not sure how this got in master, but the linter is unhappy about it so I fixed it here
+if we are returning the `ws` here when passing in `se:cdp` we can just return it straight or do we have to make a request to get the `ws` address?
+minor: can be in-lined in return
+Should we add a warning for anything over say 8M? Just suggesting that is not recommended?
+no need of pub;lic.
+how about moving it under L26
+I could've sworn I got a `403` myself when I got that response locally. Is `200` what the API would send back for a `permission: false` tag?
+This is only used for headers and therefore isn't used.
+What about `selectedColumns`? I believe it is frequently used throughout the project.
+We can revert this to reduce the diff of the PR.
+Migrate the spec.Labels to locator.Labels ?
+We probably want to log the fact that a `MessageId` was not present in the response. In addition the `RequestID` from `request.Request` should be included in the message so that the user is aware of the issue.
+Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+Shouldn't need this-> here.
+My only concern with changing the node selector here is that someone else _could_ have built their own images for other platforms and set them to be used using the flag override on the controller, which in turn this change would break. Perhaps not changing the selector for acmesolver pods makes most sense, and then working on actually having support for Windows? wdyt?
+This is a bit of a throwaway field in the xunit output, it doesn't impact anything on EVG, should we just name it `integration` now?
+You may want to use assertNull
+Why is this value set to "min_by", and what are the implications of it? Does `&:to_f` play nice with semver (e.g. 1.2.0)?
+What's the purpose of this `backgroundCtx` field?
+For some reason these tests started failing due to an extra `NEWLINE` returned from `h.query()`. Have not tried to check whether this may be a problem for real templates or not, just fixed the failing tests. Anyone with an opinion here?
+'A' instead of 'An' here
+I think this should never happen and should return an error also. Having `WorkflowBackoffTimerTask` with `UNSPECIFIED` type looks weird.
+move to line 18 below
+minor nit - add "persist-filesystem" and "persist-directory" into commit message, as its something people may search on (maybe applies to a few other commit messages)
+it introduces a lot of complexity to the state, can we flush straightaway or create a two level flush store where the questions are read form unflushed data?
+I would avoid the term "errno" as it implies the glibc variable. Use error_code or status or something.
+Seems len(cnb[0]) will be the length after the write since of the *v thing we saw no?
+can we also check for smaller zoom levels returning valid error codes?
+This winds up flipping the desired values. Looks like I gave you a bum steer @kevpl
+This check is a little odd, and will still mess up with empty strings `''` because empty string is falsy. Can we change this to `|| _this.getValue(path) == null`?
+Check modname instead, but only if it's a ImportFrom.
+Sorry I'm confused. Why not kwarg this like the others?
+Is OK that we don't have some placeholder?
+why isn't rubocop failing for single quotes?
+Maybe call it `WireBridge`?
+this warning shouldn't be produced if we configured a cache either
+Just noticed, are we specifically missing the addition of `SharedConfigState: session.SharedConfigEnable` ?
+`ctx` is unused in EnablePiped
+Is it ok to use "math/rand" instead of "crypto/rand" here? Do we need to protect this ID somehow?
+What are the possibilities here? Since we plan on supporting .net standard 2.0 from day 1, we might as well tackle that now.
+The spaces are actually legitimate here: in python, you: - first import standard library modules (hint: time is one) - then import 3rd party library modules - then import the modules from you project (here kinto). Between each block you need an empty line.
+Why do we need both `HPX::m_hpx_initialized` and `HPX:: m_was_initialized`?
+Could you also remove the `defaultSamplingProbability` constant from `sampling.go`? It seems to became unused with this change.
+Why this is needed?
+Why && changed to || ?
+The use of `#should` was triggering an rspec depracation warning for me, which is why I switched this to the rspec 3 style.
+The name `errors` is a bit mis-leading -- usually I'd expect a field called `errors` to be an array of errors but here it's just a count. And it's not a count of _all_ errors -- it's a count only of some errors.
+What's the theory on why this could fix the hang? It seems like the call to `GetRootNodeForTest` will always need to call into the crypto object before returning an error, and so it should block on that `c` receive, after which the test immediately drains `errCh`. So I don't quite see how buffering would help...
+Could we rename those to `CustomClientAuthentication` (same for Router) to remove ambiguity between Authentication and Authorization (permissions)?
+Can we remove the argument from this message? A message will include a line number already that points to the place in the code that has the problem. I think we can remove it.
+I do not think we need to do a source code change to handle this. We could set the subnetwork to default to /32 (/128 for ipv6 ipv4-mapped)
+@alastair, because the `insertId` for two listens with different metadata and same ts was the same, only one of them would get written into BQ. A question is what would be the ideal way to write tests for stuff like this, so that this doesn't break again?
+Can this use the route helper instead?
+/DispatcherStatistics ? /statistics is a bit confusing with /stats
+Please add "Array" back, right now it's not a proper sentence.
+I don't know if there are strict conventions about this, but I think the name of the warning should be the diagnosis, not the suggested course of action. In this case, that would mean changing the name of the warning to `interactive-exit` or something like that.
+The bind address should be configurable.
+I think we should keep these, o.w. our examples will be wrong (where we're importing from `dagster.utils`). Also, we might break folks who've imported following our docs.
+I'd rather catch those to `utils.py` and raise a simple ValueError from them. From the resource point of view, these are details of implementation
+We do this in lots of places I'm starting to notice...typically you'd avoid taking concrete dependencies, but we also avoid package dependencies as well which makes sense (i.e. not using an IoC, etc.). Any reason we don't implement some form of poor-man's DI and/or a simple factory instead of new-ing things up everywhere. This may be a simple example (as I'm guessing this is likely the only place this is ever or ever will be used), but separating them doesn't take any more time/effort either really.
+Shouldn't this be a `libfs.nullIDGetter` (exported, of course)?
+Could you split this into multiple lines?
+ad.Source is disk name? Shouldn't the order of initialization be reversed here then? First set ad.DeviceName, if it's empty, set ad.Source? Or this is a different use case? This is the third place where this device/disk default logic is implemented, so another reason to move it to regAttach, if it's possible to be generalized.
+Commit 676eeeab10884456a5f70ce708a8aa5116ecbaf7 contains a lot of unrelated code style changes. Please get rid of these.
+import but not used so you did not resolve compile warnings?
+This should allow `role=definition` and `role=term`, possibly also `role=list`?
+If you use an enum for the streaming type, you wouldn't need to add each boolean as a separate attribute.
+seems reasonable to also want to include the 'to' location?
+Does it work to run all the sil diagnostic passes before we serialize? That would be more consistent with what the normal compiler does in `FrontendTool.cpp : performCompileStepsPostSILGen()`
+would be `DEPRECATED Percentage of the graph (in vertices) to contract [0..1]` better?
+Nit: Does this make more sense as `iceberg.hive.metadata...`? The rest of the configs seem to start with `iceberg.hive`.
+Why do we need `\n` if we already use `WriteLine`? (and `\n` is not cross platform)
+In iceberg, we usually don't use `*` to import package, it's more clear to import the specify package one by one.
+Will it still be an issue if all the models use the same data set?
+Could we not just always include `self.config.options.listen_host`? If that is empty, the `address[0]` check should also never be true.
+We called `t._1.equals(...)` where `t._1` potentially could be `null`.
+`Vector<byte>.Count` should Jit to const when intrinsic; not sure when `Vector.IsHardwareAccelerated == false` ; however we know `readonly static int` does Jit to const.
+rename -> info ?
+This variable name should probably contain `grab`
+Well, it is providing a platform neutral way of calling Task or TaskEx. We could just call it PlatformTask.
+We probably don't need to print the msg with e.getMessage(). It will be printed by the logger since we are passing the exception as a parameter.
+Is it a concern that we initialize these fields irrespective of whether resources like cgroup/volumes are enabled or not?
+Please use something like html.escape() to ensure that the text is totally safe to include within html. &lt; is not enough.
+Why not use the JSdoc annotation as it did before?
+is this already called by actPool.validate()?
+The Email field is not translated into Russian, and into any other. It's kind of a "standard" word. Therefore, we may face the fact that you have to create files with exceptions for all languages. @caouecs, what do you say?
+Better to just do `const err = yield User.bulkWrite(ops).then(() => null, err => err);` so you don't need to write out the whole `try/catch` block.
+Does everything on cursorState belong in the command options?
+The field name doesn't really capture what this option does. I think `mConfirmDiscardMessage` would be a better choice.
+haven't been implemented the `__constructor` for `NormalizerConfigPass` ?
+A small nit: This variable should start with a lower case letter.
+I was seeing `Warning: preg_match(): Unknown modifier 'a' in /path/to/project/vendor/vimeo/psalm/src/Psalm/Context.php on line 480` here
+I realised that this is not used anywhere
+we should not resurrect this method that we just removed
+This command displays available snapshots on a volume.

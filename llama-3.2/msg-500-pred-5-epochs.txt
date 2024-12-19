@@ -1,0 +1,500 @@
+This is not related to this PR, but I noticed this is not a single space, so it will be treated as a new line by the
+This should be a `wait.Until`, r
+This seems like it should be a `GetValueAsInt64` or `GetValueAsInt64S
+This change is not related to the issue, i
+I think you can just do `if /cisco_nexus/` here, since the `~` is opti
+I don't think we need to do this, since the `group` is only used in the `TaskGroup` struct, which is only used for the `Task` struct, and the `Task` struct is only used for the `TaskAPI` struct, which is only used in the `api` pac
+The `url` is very generic. I think we should use `github-branch-url` or something like 
+shouldn't this be `GetCleanNam
+I think this should be in the `else` 
+Shouldn't this be in the `if (hasAnalysisCache) {... }` b
+I would add this in a `else` block, so that the `else` block is only a single `orWhere` statement, and then the `else` block is not ne
+Please use `cfg.Server` instead of `cfg` 
+@benzonico @danielbeans @pablolagreca - I think this is not used anymore, it should be removed from the pro
+This is going to log a lot, as we refresh the metadata for 2 properties in every th
+nit: new
+This is a very small change, but I think it should be `include Mongoid::Document` instead of `include Mongoid::Docu
+I'm not sure this is a good idea. We have a `PANDERA_MIN_VERSION` variable in `setup.cfg` that specifies the minimum version of Pandera that we use. It seems that this means we can use older versions of Pandera. Is there a way to use the `@1.0.0` annotation on this package? I think that would be be
+I think this line is a bit too 
+Should this be `Category.Warn
+This is the only change that is not backward compatible. I don't think this is an i
+Why not `sid.Sessio
+I don't see `System.Linq` being used
+The space here is not neces
+This will break if `this` is not an ob
+Is this ne
+Do we need to support PENDING 
+This is a bit of a nitpick but I'd prefer `ECS timeouts` or `ECS delay` or something like that, since `eventual` implies that the data may be missing or not yet avail
+Maybe you should change this to return the length of `line` instead 
+This should be `->getResponse()->getStatusCode()`, but it's not a big 
+I think we should probably add a `updated_at` column to `repo_history` and then use that to compute the version nu
+Why is this change neces
+You don't need to call `strerror` here. You can just return `status` dire
+This is a breaking change. Shouldn't we be able to start a new instance while already run
+I think this should be `repr_kwargs` and not `repr_kwargs = (, '.join(.
+I don't think this is right anymore, this is where we mapped routes to the exceptions app. I think we should make this change 
+Can you use `require` instead of `require.load`? It's better for unit t
+I think this check should be done in Broadcas
+I think this function is not neces
+This should probably be a separat
+I'm not sure if this is a good idea. If we're already using a `settings` property, why do we need to add another
+I think we should move the `keyMapping` out of `Headers` and into `cache.UserState`. This is because the `cache.UserState` is the actual user state, and it's the user state that should know about the key mapping. The `Headers` should be a lightweight representation of the `cache.UserState` that we can reuse across multiple requ
+This should be a property of the parent
+why not `&& props.value!
+I would call it `isFocus` 
+This is a breaking change. We can't do it in a major version. We need to keep the existing values for the major ver
+Why do you need the Anomaly class here? It's already imported in the `descriptionapi.py` 
+Why do we need these new co
+What's the difference 
+I think we should just use `env=check_env` here, and not worry about universal new
+I don't think you need 
+I think this is a bug in the rules. The rule should be `len(rule.DstPortSetIds) == 0` not `len(rule.DstIpPortSetIds) 
+I think this can be rem
+I'm not sure if this is correct, but I'm assuming that this is supposed to be a `St
+I'm not sure if this is correct. It looks like it will overwrite the value of `systemdsystemgeneratordir` from `pkg_config` (which is fine) but it will also overwrite the value of `systemdsystemgeneratordir` set by the `systemd` package. I think the best way to do this is to use the `AC_MSG_SOURCE` macro to check the value of the package variable and set the environment variable if it is not the one we 
+What is this change
+I think this should be a `lastUpdateTime` (no `-t
+This is a bug fix. I changed this to not block the queue when there is no new b
+I think this should be handled by the calling code, not this c
+Line is too long. [8
+This is a bit confusing. Please either: - Add a `name` parameter with a description, and keep the `name` argument as the first argument - Add `name` and `description` as keyword arguments, and add the `name` argument as the first argu
+I think the `altModifier` should be assigned to `binding.modifiers&...` instead of `isinstance(parent, JAB) and parent.role==...` (which would be a false positive if `self.role==controlTypes.ROLE_MENUIT
+I don't think the change is nece
+This should probably be `self._conn.clos
+Why not set it to
+Line is too long. [8
+It's not clear to me that this function is only for React Na
+I think it would be more appropriate to call `wlr_seatkeyboard_grab-cancel` 
+I'm not sure why the `getSenderNonce` method was del
+Shouldn't this be `splitInfoSize 
+Is this just for the test? If so, can we make it a constant in the 
+Why not `void *` 
+I'm not sure if this is the right thing to do, but I think we should at least lo
+Is there a reason you didn't just use `self.addButton =
+This will not work if the input has a different level name than the output. I think you want to do something like: `pdf = pdf.stack(level=1).rename_levels(None, None, 'level
+@peterjoona @harrisonwong this is the fix that will prevent the table view to reuse c
+This should be `TESTANY(... | DR_DISASM_ATT,...)` (same as the other
+I think this should be `from.relationship import 
+This is an example of why we should not have a unit test for a mes
+I think this is a bug in the original code. I would make it an optional parameter to `checkCac
+This change is for the test case to ensure the channel is not blo
+Can we keep this file e
+This should be `RemoveReachableFiles.class.getName() + " does not implem
+Why is this change ne
+This should be a `DeveloperError` ins
+I don't think this will work. The `curl` command needs to be run in a virtualenv environment, otherwise it will run in the system command 
+This is a bit odd, since we're storing a `bool` and a `int`. I think it would be better to just store `IsInt` and then `Int`, and let the `String` and `Bool` fields be rem
+Is it possible to set the distribution mode for each t
+I'm not sure if this is a good idea, but it seems to work for now. I don't think we should use the file being parsed path when using the command 
+remove the 
+I think we should also add the fact that the file is missing 
+I think you need to add a return false in front of this 
+Why is this not inside the `if err!= nil` b
+Should we add `--log-level=debug` or `--log-level=tr
+I think we can remove this i
+I think it's worth noting here that the response is sent twice. The first time to the `Send` method, and the second time to the `composeX509SVIDResponse` me
+I don't think this is needed an
+What if `ci.StartupScript ==
+@Kochenberger I'm not sure if this is still rele
+Do you need to create the vector here, or is the vector created by `get_devi
+I'm not sure how this is used, and the doc doesn't seem to explain it well. I would say this is a war
+I think we should add a lower bound 
+Can we add this to the constructor of `ManifestReader` as 
+why not 0.5 
+I think this should be a separate flag, `--verbose` (not `-
+this is not a valid type, and will
+I think we should keep the reference to "Connection String" here, because we're not going to switch to using the environment variable, and it would be good to keep the explanation that it's the def
+What's the motivation for passing in the input sc
+This was the only place where `chr()` was 
+This should be `substr($localPath, -1) ===
+This is a bit confusing, `ELEVATE_ONLY_DOCS_MATCHING_QUERY` is a boolean flag. If `ELEVATE_ONLY_DOCS_MATCHING_QUERY` is `true`, then `ELEVATE_EXCLUDES` is `true` as well. But it looks like you're checking the oppo
+Should we increase this by 1 instead o
+Do we need to keep the old 
+I think this should be `daysFromDate((Date) leaf.getLiteral())` as well, since you're not doing any conversions 
+I think this should be `iss.Spec.Vault.Auth.Kubernetes!= ni
+I don't think we should be testing the client's random here. We should be testing the server's ra
+These classes are not used anyw
+Use the new Ruby 1.9 hash sy
+This is not a good usage of namespace. It's better to do `using Nethermind.Blockchain.Bloom`; and `using Nethermind.Blockc
+I'm not sure why this is ne
+This is the main change in this PR. I don't think it should be a flag, but instead should be a constant in `contro
+I'm not sure this is right. This is the `num_raw` value after the `spare_bytes()` 
+Why are we changing the return 
+This should be done in `onDisplayModeCha
+I think this should be `k8s.io/node Informati
+I think this is a duplicate of the one in the service. It should be removed 
+why is this change neces
+Why is this not `defaultRenewBeforeExpiryDurationSeco
+What if the user passes in `--channel channel`? Should that be all
+Why not just do this: `Object.keys(props).filter(key => formPropsSet.has(key)).reduce((prev, key) 
+Should this be `@returns {
+Please revert this c
+nit: this is a fake implementation of the service, so it should be called `
+I don't think we should make this an attr_reader. I think it should be a private instance vari
+I think this is a
+Can we keep this under 100 
+I would prefer if this was called `NewEmp
+I don't think we need to use the `User` service to get the user id from the message. We can just use the `HandledStamp` to get the user id from the e
+I would use a different name for the output image to avoid confusion with the input i
+I don't think we need this
+This is a bit annoying, but I'm not sure if we can do better. We can't use `api.ethBackend` directly, since this will fail when we don't have the backend (e.g. when we're in `--chaindata` m
+@smarterclayton this is the only thing I've found that is related to 
+This should be a `panic` instead of `logger.Fa
+These should be `protected f
+This should be `typeof error ==='str
+Can you explain why you removed 
+I don't think this should be in th
+Is this still neces
+Please remove the extra line 
+I think we should use `GitHash` consistently in the server, client, and package.
+I think it should be `LOG(WARNING) << "put failed, ret " << static_cast<int32_t>(co
+This is not correct. `out_variant` is a pointer and can be `NULL`. If it is `NULL` and `error` is set, the function will return `FA
+Why not `H2O_HTTP2_ERROR nhớ_NEE
+this is a bit confusing because I would expect `--stress-test` to be a flag to the `--time` option instead, and the option should be called `--stress-test-
+`owner` doesn't seem to be 
+I think this should be "my.mysterium.network" rather than "my.mysterium.network.net
+Why is this nullable? I don't see a case where the caller would provide 
+Should this be a `T
+I don't think we need this, `PortBindings` is a private member of `Container`, so you should be able to access it dire
+This is a bit weird. You don't need to check for pygment 
+We should move the `k.previouslyConnected()` call to the `NewPeerManager` method so that it is initialized when the peer manager is cre
+I think we don't need to define this cons
+Should we do something similar to the other locations in this 
+Why is this ne
+Why not use `Integer.valueO
+should this be 
+You can use `Kokkos::Assert("The unanimous Declaration of the thirteen united States of Ameri
+this should probably use `exiter.e
+I'm not sure why this is being removed, but if you look at the other places where `IsPossibleDynamicType` is called, it's always with `true` as the last parameter. It's possible that this is causing some unexpected beha
+I think this should be `return d.m == nil || d.m[revField]!= nil` or something like that, because otherwise we would write a revision field even if the field is
+Why not keep 
+Style/CaseEquality: Use === instead o
+@jimshaver @jackremnant I'm not sure why this was skipped be
+I'd prefer if we didn't name this noOp, but something like "empty detector" or "no-op detec
+nit: it might be better to check the value in the env variable. `strings.Contains(podName, "antrea-age
+Is there a reason to not use `through: :user`: `has_many :observers, through: :u
+Maybe it's better to log something if resyncing is actually happening, i.e. when `r.inSync == false && r.resyncInProgress == fa
+Why are these ne
+I think this is going to break our Windows integration. What if the `random_bytes` failed? Will we still be able to establish a winrm connec
+I don't know if this is the best way to do this. I guess it's 
+I think this is the only place where we can just use async
+I think we should be more specific here, like "connection is not in conntrack ta
+nit: the method `new CaseInsensitiveMap<>()` can be removed because the constructor `CaseInsensitiveMap()` does the same t
+I think this should be `this.core.log(`[GoldenRetriever] restored ${fileIDs.length} fil
+This is a bit strange to me, but it seems to 
+This is a breaking change, right? What is the default behavior in the old ver
+It's not obvious that this is being called in the `load_finished` signal handler, so I'd add a note explaining 
+this is the only change in this file. I think it's not ne
+Should this b
+We should probably change `AWS IAM` to `AWS IAM (AWS SDK for Java v2)` here and elsew
+I think this should be a f
+I'm not sure if we should use the service account name or the namespace. I think it would be better to use the names
+I think we should just always use `handle` 
+This could be `lo
+This is a bit of a nitpick, but since we're using ` bufio` we should probably also import `text bufio.TextReader` to avoid the need for the `bytes.NewRea
+I think we should move this to `httpclient` pac
+We're now using the market address to identify the ask plans sto
+Could you please update this to `if len(types) > 0 && len(data) == 
+Why are we deprecating this
+I think we should add the `Loco` part of the bundle name to the bundle
+Would it be better to log an event here? I think it would be helpful to see the number of calls that are being suppre
+This is an API change. It should be in a separat
+nit: can we make this a cons
+Can we use `self.build_tracking_url` from `
+Please remove this blank 
+Maybe we can use a different name for this variable? `myId` is a bit confusing because it is not the identity of the ca
+We should only add the discriminatorKey field if it is present in the sc
+Why is this file in the `src/iface` direc
+This was removed because it was a duplicate of the comparison b
+Maybe rename this ProtocolPMTUDisco
+I think this should be `els
+I don't think we need to set a default value for any of these, since if they're not present, it's a user e
+Why not use the Apache version of 
+Can we have a test case for 
+We need to update the flag description 
+The `tearDown` method is called after each test case, not after the entire test s
+Please remove this
+I'm not sure why this is neces
+If this is only used in test, I think it would be better to move it to the 
+This is not a transla
+I think this can be rem
+This is not needed, the icons are already added when the tabs are regist
+I think this should be `assert os.environ.get('ALLOW_INSECURE_CATALOG_ACCESS') is not 
+Shouldn't this be a class and not a st
+I think it would be more readable if the parameter were called `cont
+I don't think we need the provisioning module in 
+This will break any custom services that might be used by other apps on the se
+I think this should be `files.
+We should not use an enum in a test class. The test should not depend on the implementation det
+Do we want to change this to `db` or `dba`? I think `dba` is what was originally inte
+This will prevent serialization of the logger ob
+this class is now public, but it is not a public SDK. It is a private class in the
+Nit: I don't think these spaces are ne
+I don't think this is necessary. You can just use `extern const wlr_drm_interface iface` and it will 
+I think we should have a config setting for this,
+I don't think this is a good change. This would be a breaking ch
+I think the `code` and `message` were the right names for the t
+Why did you change 
+Why not use the index of the ma
+Why is this change neces
+Why is this in this 
+This is a breaking change for backward compatibility. We should have a `@Deprecated` annotation on the c
+isn't it better to have the domainid in the `SliderItemData` ob
+Should be `current` instead of `curr
+Can we have a unit test for 
+nit: `aggregates` -> `inte
+This is an unnecessary c
+Do we need to override this? I would think the default should be en
+I think it would be better to do this in `formatShapeRef` in `mod
+Is this due to the size of the notch 
+I think this is supposed to be `slaveCon
+This is going to be a performance killer. We should be checking for `node.hasAttribute('aria-hidden')` and `node.hasAttribute('aria-hidden')` to avoid the extra function 
+I'm a bit confused by this change. Is this related to the new `ErrFileNotExi
+I think this could be moved into `addSystemAccountExp
+I guess this should be `await server.stop()`, but I don't know for
+Why not just use `USE_STARTING Sequence_NUM
+`self._tabbed_browser.tabBar().moveTab` should be wrapped in the try/ex
+this is only called if the media is not in the 
+nit: please revert the import cha
+This is unnecessary, you can just set `DialogResult` to `DialogResul
+I think this is a breaking change for users. I don't think we want to do this by def
+I think we want this to be `Span<byte> path` and `Span<byte> qu
+This is not the same as the production env. We want to run in sandbox, and this will disable 
+Is it worth to have more buc
+Why not `null!== $mediaContext = $media->getContext
+I don't like this. It's a bad practice to have ` Dummy` cla
+We already have this im
+I'm not sure I like this name, I'd prefer something like `CheckRange` or `CheckQueryRange` or even `Check` (but that would be confusing with the `Check()` call b
+This will print the error message to the console but it will not exit. Can we use `exit` 
+This is the fix for #
+I think we need to make this change in the upstream as 
+Is this a 
+Do we still need the parent check if we are always prin
+I think we can simplify this to just `setColour(colour, colour, colo
+Is this the only way to import the p
+I think you can remove this from the controller, it's not being used any
+I think this should be `TIME = new TimeType(MYSQL_TYPE_TIMESTAMP)` and the other `TIME` should be `TIMESTAMP = new TimeType(MYSQL_TYPE_TIMEST
+The `if`s are too 
+I'm not sure this is a good idea. The `refresh_access_token` method should only be called when the token is invalid or exp
+Is it possible to have an error code or status code associated with the e
+I think we can use `aws_stack.connect_to_dynamodb()` 
+Shouldn't this be the last thing to do, after all the other plugins have been initial
+Is this interface ne
+Line is too long. [8
+I think the `Win` is a 
+@jridgewell, I think you can remove this line
+I think the name of this div should be `w-branching-la
+shouldn't we call `shutdownNow()` here,
+Why not use `LDR_MODULE_64` instead of `get_ldr_module
+I think the loop is not needed 
+Extra empty line detected at method body
+Is this neces
+Can you use `String[]` 
+This is not the right place to put it. The context should be set in the `RestProducerInvocation` itself, not in the `RestServer` implementa
+I think we should consider a more generic selection method. It's not just for state root selection. What about a method like: `SelectTransactions(Keccak hash, long gasLi
+this is the only change needed to fix th
+I would have expected this to be called `AzureTestUrlExtensi
+Is this function 
+I think this should be done in the `begin` block below, so we only do this if the `begin` block f
+Why this ch
+this import is no longer
+Is this inte
+I think this is a no-op fun
+This is a bit of a hack. I'd rather not have the flag in the struc
+I think it's better to specify the exact ver
+nit: please rename to `textNoDataSt
+I don't think this is a good place to place this message. I think it should be in `QWebBrowser`'s constru
+This is now the default, r
+I think it's better to use `string` instead of `[]string` here, since it's a list of clock
+Is it possible to remove this method from the benchmark enti
+I think we can remove this method, as it just calls `FileSizeChecker.bytesToHumanRead
+I think it's better hidden for
+This is going to be a bit of a problem in 64
+I don't know if this is a good idea, but I would suggest to use `env_key?` from `lib/environals` to check the env vari
+This interface should be in `azkaban.imagemgmt.service` package, since it's related to image management ser
+I think this should be an error. If the user changes the security groups, then they should be able to do so in the UI. The API should not allo
+This needs to be updated to something like "Azure Resource Management supports only HTTPS sch
+This is no longer necessary because we are no longer running with the seccomp lib
+this is a bad fix, I will f
+This is not a `CallbackChecker` anymore, so the import should be rem
+`from.grid_sampler import grid_sample`, remove `from.gridSampler import grid_sample` in `gridSample
+why not just `applyToWindow(wind
+I think we should use ` Annotations` instead of `CopiedAnnotations` 
+I would move the `if` statement to the next line, so that the call to `deleteCart` is not executed if the `if` statement is not 
+nit: can we rename this to be something like `set_record_timest
+This is a breaking change. We should have at least a flag to switch between old and new beha
+Why is this needed? The default is already T
+this is the only change in this file, but I don't understan
+Don't we need to have the schema defined with qu
+This is the same as the other 
+why do you need 
+why do you need to define these 
+Unnecessary c
+`if self.with_semantic and 'bbox' in self.semantic_fusion and bbox_feats.shape[0] 
+I think it would be better to use `{user:}` instead of `{us
+I think the `Observe` method expects `time.Time` so you can pass in the `start` dire
+I think this should be in `IndexSearcher` since it is a common behavior for `NIOFSDirect
+This should be 0 for the def
+I don't think this is necessary, these are all included in `acti
+I'm not sure that this will be printed in the final r
+I think it would be better to move it up, right after `$maxQueryCount 
+I think we should use `glog.V
+I think we should keep the `listen` and `unlisten` methods, because they are more descriptive of what they actuall
+I think you can delete this property and the `name` method as 
+This is a nice addi
+Why not use `Maps.newHashMa
+I think we need to update the documenta
+I think we can remove this impor
+I would add a description of what speech is and what it does, and what it is showing by def
+I think the implementation of `DataFile` is a `List<Lo
+this is not used any
+What's this option
+nit: "which can generate further telemetry" -> "that can generate telem
+Why is this an
+We should add a `DecodeContainerRecord` for the `ContainerRecord` resource 
+This is a bit of a hack, but I think it's a good one. The `object` dtype will be used for any column with mixed types. I think this is a good approach because it's not too complicated and it's also consistent with how `dask` w
+I think this is unnecessary, since `QueryVisitor` is already a vis
+We need to make sure that we're testing on window
+Can we add some assert here that response is not 
+I think this function is not ne
+I don't think this is used anyw
+remove the extra line
+I think we need to add Wireguard to the list of `epType` in `confi
+This is the same as the `Interpreter` package, r
+This is a bit of an odd thing to do. I think it's better to have both the pb and the 
+Is this okay? It looks like we're still using the older ver
+`driveFiles` is not a valid f
+It looks like we can remove the `useInView` hook here since we're just using `useEffect` to trigger a re-render on the state ch
+I'm not sure if this is a test, but it seems like this is a bit of a hack. How about we use `TestClusterDeploymentWithoutRegionLabel` and validate that the cluster region label is set to `h
+Do we need to check for `ta` to be non
+This is the only change I'd like to make in this PR. I think it is good to have the default for `--review-status` be `confir
+This change is not ne
+Is this a hard-coded v
+I would expect to see an expectation that reports 0 examples were reported with `exit_early`. Otherwise, this test doesn't seem to cover the expected behav
+This is not a field but rather a cons
+We should be using `glog.V(2).Info()` 
+I think it is, but I couldn't figure out where to move
+not sure if this is the right place to put this. This controller does not use the librarygo contro
+Why is this change 
+this is not the only place where we are using `classificationCompute`, so it needs to be updated accordi
+I think it's still useful to log this
+Can we update the license to 
+If we're going to do this, then I think we should remove the `OnPrem` field from the envconfig, and just use `AWS_DEFAULT_REGION` to determine if we're running on-
+I think this should still return a 
+I think this is the only change that should be in thi
+Is this change intenti
+Can you explain why this is neces
+Please sort this import according to the project's stan
+Shouldn't this be "\u2
+this is the only test that's actually testing the deprecation warning r
+This should be `private co
+Is this change cor
+I'm not sure if this is the right way to do it. I think it's safe because `p371_187` is the only version that works with `1.87` but if we ever release a new version of RVM 1.37 we will need to update this code to get the new version nu
+I'm not sure if this is the right way to handle this case, but I think this is the only way to make the test 
+Why move this out of the `else` b
+I'm not sure if we want to make `options` a method of `Application` or if we want to have a `options` constant. I think we should be consis
+I would have just added a simple `echo` here. The `__invoke` is only needed if you want to use this directive in a PHP sc
+How about we keep the `int64` type for `currLimi
+This should be configur
+This is a cloud-conformance requirement. I'm not sure if we should add it to our package, but I don't think we can add it to clou
+This is just a prefix, right? Should we include the API version in the user agent st
+This should be rem
+This is the only one of the 4 tests that had to be changed. The others were not changing because the values were the 
+This is not right. The `workingDir` is for the `maven` and `maven-remoting` processes, not the `maven-compile` pro
+this import should be re
+Why are you adding the `FAILED_TO_LOAD` 
+It looks like `exec` was supposed to return an error in this 
+I think we should just remove the `/se/` part from the
+I'd probably add the `resultSize` here, it's a bit of a weirdness but it's a bit of a common use 
+I'm a bit confused by the name of this field. Is this the "max size" of the payload, or the "max amount of payload" (e.g. the number of bytes)? If the latter, I think it should be called `max PayloadS
+I think we should make this 2048, 5000, 3
+Can we use the generic selector 
+this doesn't seem related to th
+I would expect this to throw if cancellationToken is cancelled while the callback is being invoked. Shouldn't this be a TaskSo
+I would rename this method to `selectColumns(String... selectColu
+Nit: Unnecessary ch
+Why is this rem
+Is this change related to the i
+This is the only change that's really relevant to thi
+I think you can just do `if (this->GetTarget() == this) return;`
+why is this ne
+I think it's better to keep the condition to avoid the `undefined` v
+I think this should be `null` instead of `null` (just in case there is a bug somewhere 
+This is a change of behavior, previously the API version was the last to change, now it will change f
+should we name this backgroun
+You can do `assertEquals(h.query(req("q","*:*", "wt","velocityWithInitProps",VelocityResponseWriter.TEMPLATE,"foreach")).trim(), "
+This is not a treeMap, it is a hash map with a tree compar
+This is the only change I made to this PR, just making it a bit more read
+nit: this import is not 
+This is the only usage of this function. So I think it should be inl
+@marosset @michecks should we not also flush the block tree 
+This is not a valid use of a variable with a name that is a key
+I don't think we want this. If the buffer is large enough to replace the entire output buffer, we should d
+This is a change in the tile url format. I assume you changed it to 12 because 3 is not a valid digit in the
+This is the only thing I'm not 100% sure about. I'm assuming this is because we are trying to be consistent with the other directories we have, but I'm not entirely sure
+I'm not sure this is correct. If the value is `false` (which is a boolean), we shouldn't be skippin
+This is not exactly what I would expect from this PR. I would expect that importedname is already the prefix, e.g. if we have `from.foo import bar`, then importedname should be `foo` 
+How about using `config` instead of `global_conf
+I don't think it's a good idea to set the `src` attribute to an empty string. It's much better to set it to `data-src` ins
+I think this message should be in the `config/letters/textsak.js.ejs` file, not 
+I don't think we should do 
+I think this check should be `if (LOG.isLoggable(Level.WARNING))` as it's not a cons
+nit: we could use the `aws.Config{...}` syntax here instead of creating a new st
+Is there any reason why we can't implement 
+Is this change requ
+I'm not sure if it's better to have the "setting" check in the `.NET Standard 2.0` branch, or to have it in the `Debug` branch. I guess the latter is better, but I'm open to suggest
+I would have put this line in `__init_
+I'd like to suggest using `std::memory_order_relaxed` instead of `std::memory_order_sequence_weak`. This is because the `finalized` variable is not always read before the `init` operation, but it is guaranteed that `init` and `finalized` will happen in the same sequence. So, if we use `sequence_weak`, we can have race condit
+This is not a bug, but a change in behavior, r
+This import is not 
+I think it's better to use `Objects.requireNonNull` 
+This seems like it should be a single line
+I think we can get rid of this attribute now that we no longer have the `SummaryNotification` c
+This is a bit of a hack, but it's the only way to make the test run in para
+Why are we adding this to `Opti
+It would be good to have a unit test for 
+`new_connection->remote.address ()` is of type `const ip_address_t`. It should be safe to call `to_v6` on it without a 
+I would make the recording_msid an int, so it can be a long int if we ever nee
+Use 2 spaces for indentation in a hash, relative to the start of the line where the left curly brac
+Typo here, it should be `statis
+This should be `array $va
+Suggest: "Instead of using sys.exit() or quit(), consider using sys.ex
+I'd rather have this in a separate me
+This is now unused, but I think we should keep it around, since it's a simple module and it's not worth the cost of re-implemen
+These imports are not 
+Nit: I think this can be `const`
+I'm not sure why this is 
+Shouldn't this also be `controlTypes.ROLE EditingCont
+This should probably be `addErrs(errs, s.w.instances.w.disks.regAttach(ad.Source, deviceName, ad.Instance, ad.Mode,
+This import is un
+I think we should use `io.netty.handler.logging.AccessLogParser`
+I think this will also include nodes that have a role that we don't care about. I would make this a bit more specific, and also add an exception for `RoleN
+I think this should be `methodViewBuilder.isRequestStreaming(context.getMethod().getHttpMethod
+This message is now duplicated in `FileCopyUtil#copyIfModi
+Why do we need to run all of these before serializa
+I don't like the fact that it's not configurable anymore. It makes the contract step not fully reusable. It's a bit of a hack, but I don't see a better
+Should we make this a static f
+This will be re
+Please avoid star imp
+I'd use `m_use_tarball` instead of `m_dir` to make it more clear that this is a 
+This is a change in behavior. If we are connected to the server and we want to connect to the server on the same host, we don't raise an exception anymore. I'm not sure if this is the correct beha
+This is probably not the best way to do it, but I don't have a better
+This seems like an odd constant. Is this actually 
+why not using ` Versions *Versions` as the 
+Is this a new ch
+I don't think we need the suppress message here, we can just remove the prop
+I don't think this is a valid argument for the user to pass in, as it would mean they don't want any encryption at
+I think we should also add a `DockerClient` to the `TaskResource` struct, and pass it in from `NewTaskReso
+This line could be simplified to `message = `<pre>${message.replace('<', '&lt;')}</p
+Why is this in thi
+why is this rem
+I think this should be a single line a
+I think this should be moved to the try b
+I don't think we should be modifying the options ob
+I'm not sure if this is a good place to keep this. I'm not really sure what it's
+this is a bad way to inject a dependency into a 
+Is there a reason to use NABoolean instead of NABoo
+Should be `preg_quote()` instead of `preg_quote(
+This will be a breaking change. We can't do this without a major version 
+This is a good idea. But I think the set should be immut
+I think you meant to put the `--volname` in 
