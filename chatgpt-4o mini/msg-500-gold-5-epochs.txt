@@ -1,0 +1,100 @@
+Converting this to an enum makes it obvious that I combined things that don't really belong together. It would probably be better to create two enums `StoreType` and `TransportType` (in more appropriate locations). That also makes it necessary to have (at least) two `ServerSettings` classes. `IncomingServerSettings` and `OutgoingServerSettings`. Also, the naming is inconsistent. Maybe it would be better to make the string that is used for import/export explicit, e.g. WEBDAV("WebDAV").
+This looks like you're not collecting everything from the error channel.
+Can we propagate this error up the stack?
+change of name is not needed
+Doesn't this go in the opposite direction of #1051 / #1062 by putting platform-specific logic back into this module?
+nit: What do you think of `copilot-task-group`?
+We can't unfortunately change any of our old flags :( it'd be a breaking change. Instead, we can keep both `githubURLFlag` and `repoURLFlag` and make the description of `githubURLFlagDescription` as "(Deprecated) Use --url instead. GitHub respository URL for your service." It would be even better if we can make `githubURLFlag` as hidden but keep in the command. This way old commands will still work with `--github-url` but it won't appear anymore in the help menu.
+discipline vs. Discipline? Not sure of which is correct. Also not sure if there is already an existing string const.
+@angmas1 move the else up, next to the closing bracket of the if block. Also, there is no need for the braces as your else statement contains only a single line. Make your if-else block similar to the block in lines 277-280.
+Report listeners are synchronized, even 'though the cache is thread-safe... I've not profiled it, but it may be a cause of contingency. Any better way around this? Also, do listeners **really** need to be synchronized? Can't we just make them thread-safe?
+Wouldn't it be better to use a sql `IN ( :exact_value )` ?
+At some point we need to condense down and refactor our "configs" as we have too many in too many places and we're starting to get more illegible code. No change necessary but calling out for future reference.
+And again. The reason it's bad is that if someone uses a JDK not produced by Oracle they won't have this class.
+There is already a log in `BaseMetastoreTableOperations` for this. It has the location, but not the table name. Maybe just add table name to that one.
+similar here for imports, these should be consolidated (and also consolidated with the grouping below)
+Can you please change the name of this class to be something else?
+We should avoid adding a pandera dependency to Dagster itself.
+line is 138 characters
+why are we turning this one into a Warning?
+Again. This is part of the start up of the server, and the diagnostics are helpful.
+I guess `sid` was for `sessionID`, but now it looks strange: `sid.ID`.
+In general I'm a trying to understand the reason behind this PR. Looks like if a blob (name) already exists we check if the contents are identical? In what scenarios this is not the case? When we want to publish a package/asset that has changed but still we want to use the same version?
+Why the space?
+hey, aren't we supposed to be passing in two parameters here?
+why is this here? We already have a message pool in the node.
+I think it makes more sense to have this be a method on TaskStatus. Also, nit, Backend, not BackEnd.
+Should we bite the bullet and poll for the full 5 minutes that AWS recommends? If we do that, we'll probably want to leave some kind of breadcrumb in the event log to let users know why it's taking so long to launch.
+We don't store empty dictionary entries anymore: they bring no benefits, only trouble.
+Why this is needed?
+Since this may be the case, wondering if we should call the param `updated_at_i` or something so that we don't run into a problem distinguishing them down the road?
+Why are currency signs considered punctuation? They technically fall under the BMP range for Currency Symbols `\u20A0-\u20CF` (covered in `getUnicodeNonBmpRegExp`, which is itself a misnomer)
+Is betterLOG_IF(ERROR, status != 0) ?
+I assume there will never be a scenario where justValidate is expected to be true on a restart
+Shouldn't this be `cls.param.warning`?
+This is the actual fix.
+nit: maybe call these `loadCollection()/loadDb()`
+should not be this lessThan15MinAgo ?
+Do we really need the param here? If only partial results returned, we could return ResultCode::PARTIAL_RESULTS;
+@The-Compiler Is this style okay or would you prefer a common userscript exception base?
+I think it would make sense to also set `internalWebPropertyID` to `''` here. Otherwise, it might keep its previous value (let's say a property was selected before, but then the user chooses "Create new property"), but since it always should depend on `propertyID`, that would be incorrect.
+nit: "*mapping" for a map is unnecessary. Consider calling this `originalNames` or similar.
+You'll also need to adjust `FakeWebTabAudio` in `tests/helpers/stubs.py`.
+Okay sorry about this I was really confused on how to support uncontrolled in this case, so what we want to do is apply `defaultValue` when `props.value` is falsy but not undefined, right? In the case of us seeing it is controlled (value & onChange present) we apply defaultValue to `props.value` (and delete props.defaultValue) In the case of uncontrolled we shouldn't enter this branch at all and go for full native dom behavior
+As isCaret is False by default, explicitly specifying isCaret=False here is not needed, and is perhaps a little confusing. I'd prefer that anywhere in the codebase that isCaret is only ever specified if it needs to be set to true. Mirroring that of isFocus for setNavigatorObject.
+I agree with Stephen it's better to invoke getStandards() only once.
+`Anomaly` imported here, but not used. Please run the changed files through pylint with nupic pylint config and fix pylint findings related to your changes.
+Please revise the naming of these two flags. _**default**_ is the value we take when user doesn't provide. You could infer from the fact how `default_parts_num` are used.
+Who invited yoda?   In all seriousness though, wouldn't an `if (empty())` be better here?
+The name of this argument is not too intuitive. The point is, these kind of subprocess calls will return `str`s in Python2 and 'byte`s in Python3. It would be a lot of work to make CodeChecker handle both `str` and `byte` everywhere. Using the `universal_newlines` argument, we can force Python3 to return text rather then bytes.
+Nit should be using `goimports` to format the import statements with standard libary imports first, new line, followed by non-standard library imports.
+Yep, looks right; your new selector _should_ disqualify the rule from being XDP accelerated.
+@developit I vaguely remember you mentioning something about some JS engines having an escape analysis feature that makes objects (and arrays?) locally declared that never leave the function essentially free from a GC perspective or something. Do you think we could benefit from that here? Or should we leave this as it is?
+New generators should have version `next`
+Can you provide a `--with-systemdsystemgeneratordir` option here? So that I can do unprivileged installs without completely turning off systemd. I can add it as a follow-up PR too.
+Wondering whether it should be `self.clone`, or `other.clone` or maybe a new `DynamicMap` declaration entirely. I see this is in the condition where `other` is a `DynamicMap`but is this definitely right in terms of `kdims`? I need to think about it more...
+Can we rename 'refresh' to 'read' and 'update' to 'write'? Until I had read more of the code below, I couldn't tell the difference between 'update' and 'refresh'.
+i think it's OK to leave this?
+body is being used here for the first time without every being populated. This will error. To run tests do `./go clean test_py` and that will run the Firefox tests
+Use the new Ruby 1.9 hash syntax.
+Please add a space after the comma here (generally, with arguments there's always a space after commas).
+Can this just be an else?
+sorry, why this change?
+body is being used here for the first time without every being populated. This will error. To run tests do `./go clean test_py` and that will run the Firefox tests
+File is not `goimports`-ed
+I have followed the convention of `cp`
+does it return something?
+probably better to use `wlr_seat_keyboard_end_grab()`.
+nit: I can't help but think the privateTransactionHandler should be a base-class member ... every Priv Json RPC seems to need it...
+maybe we can do this in Init function?
+During our zoom and working on this, I said that I believe it was set to 64MB, not 32MB, but the diff shows that I was wrong. So we could change it back to 32MB.
+In C, file scope variables are already initialized to 0 so the "= NULL" is redundant. Not a big deal.
+Returning here bypasses all the health check and load balancing features.
+This button should also be disabled when in secure mode since it opens a web browser from which you can easily do a lot of insecure stuff.
+We can just use `.stack()` here? Then I guess we can reuse when supporting multi-index columns.
+What happens if there is no NIB/XIB with that name?
+> k1 src0 src2 -> dst s/src2/src1/ nit: k1 is actually src0 according to instr_get_src(instr, 0) which makes this a little confusing
+I think you should use `app.config`. In the usual case, the config file is not overwritten, there is additional config file outside of the source of `Invenio`.
+Most of the following test changes can be avoided if need be.
+Can you make this accept an action instead?
+why is a buffered channel larger than 1 needed here? the separate goroutines can just try to write to the channel with a select-default block, and then it is not needed. i find the current implementation a bit convoluted, maybe we could simplify it a bit? not sure why it is needed for example to communicate an empty result. these patterns can be simplified using waitgroups
+could we add this file only when we need one?
+nit: the others use the method name in the api and not the class name of the api
+Typo: this should free `xwayland` instead
+this change looks wrong to me. I think the test is trying to signal that something went wrong by throwing the `Error` here, otherwise the `catch` below will swallow it.
+Pretty sure the single quotes here should be double quotes, single quotes are not expanded by the shell.
+Do we still need this?
+Still request a local sort for bin-packing based on the defined table sort order.
+Looks more appropriate to stick this in `AbsolutePath`.. actually that already has `FLATBUFFERS_NO_ABSOLUTE_PATH_RESOLUTION`
+assignments should only be cuddled with other assignments (from `wsl`)
+can you put this flag in `blockRefInfo` instead? It would be a shame to add one more file per block, especially since we've run into inode limits. I guess `blockRefInfo` should maybe then be renamed to `blockInfo` or something. But we're stuck with the filename.
+So, such tasks that could possibly not meet the deadline will never have a chance to run? I think this is not nice behavior, especially for those projects who has sometimes some very small tasks after the big one.
+Is it possible to import from k8s instead of copy in? :)
+Does `sudo` required for `darwin` only? Don't we need it for `linux` too?
+If the logger isn't used, it probably doesn't need to be added.
+Tests for JWT handler functionality?
+I believe this whole file can be deleted now.
+Are you making it so startup script HAS to be in sources?
+Hm. This could be a case of left-sided driving, having u-turn lanes on the right side. Good catch, but looks good to me.
+Throw an exception instead
+Small nit, and sorry for not spotting sooner.. this should have `omitempty` on it, else when marshalling nil values into json, it will be `caBundle: null` which trips up some JSON parsers
